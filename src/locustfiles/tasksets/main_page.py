@@ -1,3 +1,6 @@
+
+from bs4 import BeautifulSoup
+
 from src.locustfiles.tasksets.base import BaseTaskSet
 
 
@@ -8,6 +11,7 @@ class HomePage(BaseTaskSet):
 
     def get_main_page(self):
         request_path = '/'
+        list_of_categories = []
 
         with self.client.get(
             url=request_path,
@@ -17,4 +21,11 @@ class HomePage(BaseTaskSet):
             name=request_path
         ) as response:
             self.validate_response(response)
-        return
+
+
+        soup = BeautifulSoup(response.text, 'lxml')
+        menu = soup.find('ul', class_='top-menu notmobile')
+        links = menu.find_all('a', href=True)
+        all_menu_links = [item.attrs.get('href') for item in links]
+
+        return all_menu_links
