@@ -16,19 +16,23 @@ class UserPurchase(CartPage, HomePage, GetCategoryPage, ProductPage, MakePurchas
         self.random_menu_item = None
         self.random_product = None
         self.product_data = None
+        self.menu_items = None
 
     @task
     def new(self):
-        menu_items = self.get_main_page()
-        if len(menu_items) == 0:
+        self.menu_items = self.get_main_page()
+        if len(self.menu_items) == 0:
             self.interrupt()
-        self.random_menu_item = choice(menu_items)
+        self.random_menu_item = choice(self.menu_items)
 
     @task
     def open_menu_item(self):
         category = self.get_category(page_url=self.random_menu_item)
-        # self.random_product = choice(category)
-        self.random_product = '/build-your-own-computer'
+        try:
+            self.random_product = choice(category)
+        except IndexError:
+            self.interrupt()
+        # self.random_product = '/25-virtual-gift-card'
         # self.random_product = '/portable-sound-speakers'
         # self.random_product = '/nike-floral-roshe-customized-running-shoes'
 
@@ -51,6 +55,13 @@ class UserPurchase(CartPage, HomePage, GetCategoryPage, ProductPage, MakePurchas
         if len(self.product_data.get('product_attributes')) > 0:
             for attribute in self.product_data.get('product_attributes'):
                 body[f'product_attribute_{attribute.get("attribute_id")}'] = choice(attribute.get('attr_options'))
+        if len(self.product_data.get('required_name_attributes')) > 0:
+            for attribute in self.product_data.get('required_name_attributes'):
+                if 'Email' in attribute:
+                    body[attribute] = 'Example@email.com'
+                else:
+                    body[attribute] = 'Patric'
+                    body = {k: v for k, v in body.items() if v not in ('', 0)}
         self.add(product_id=product_id,
                  quantity=qty,
                  payload=body)
@@ -58,3 +69,7 @@ class UserPurchase(CartPage, HomePage, GetCategoryPage, ProductPage, MakePurchas
     @task
     def open_cart(self):
         self.get_cart_page()
+
+    @task
+    def stop(self):
+        self.interrupt()

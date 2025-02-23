@@ -23,7 +23,7 @@ class CartPage(BaseTaskSet):
         soup = BeautifulSoup(response.text, 'html.parser')
         empty_cart_message = soup.find(string='Your Shopping Cart is empty!')
         if empty_cart_message:
-            logging.error("The shopping cart is empty.")
+            response.failure("The shopping cart is empty.")
         else:
             logging.info("The shopping cart has items.")
         return

@@ -22,7 +22,6 @@ class HomePage(BaseTaskSet):
         ) as response:
             self.validate_response(response)
 
-
         soup = BeautifulSoup(response.text, 'lxml')
         menu = soup.find('ul', class_='top-menu notmobile')
         links = menu.find_all('a', href=True)

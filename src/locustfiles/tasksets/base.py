@@ -19,7 +19,6 @@ class BaseTaskSet(SequentialTaskSet):
     def __init__(self, parent):
         super().__init__(parent)
         self.success_status_codes = (200, 201, 202, 204, 300, 301, 302, 304)
-        # self.client.headers = {'Content-Type': 'application/json'}
         self.client.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
             "Referer": "https://demo.nopcommerce.com/",
@@ -30,7 +29,6 @@ class BaseTaskSet(SequentialTaskSet):
         }
         self.cookies = {
             '.Nop.Antiforgery': self.parent.conf.nop_antiforgery,
-            # '.Nop.Culture': 'c%3Den-US%7Cuic%3Den-US',
             '.Nop.Customer': self.parent.conf.nop_customer,
             'cf_clearance': self.parent.conf.cf_clearance
         }
