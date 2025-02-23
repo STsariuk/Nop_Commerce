@@ -1,3 +1,5 @@
 .venv
 .env
 locust_test.log
+.xml
+.iml
