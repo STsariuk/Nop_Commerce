@@ -15,11 +15,15 @@ class GetCategoryPage(BaseTaskSet):
             headers=self.client.headers,
             cookies=self.cookies,
             catch_response=True,
-            name=page_url
+            name='/random/category/page'
         ) as response:
             self.validate_response(response)
 
         soup = BeautifulSoup(response.text, 'html.parser')
-        products = soup.select('div.product-item div.picture a')
-        products_links = [p.get('href') for p in products]
-        return products_links
+        sub_category = soup.find('div', class_='category-grid sub-category-grid')
+        if sub_category:
+            list_of_url = [a.get('href') for a in sub_category.find_all('a', href=True)]
+        else:
+            products = soup.select('div.product-item div.picture a')
+            list_of_url = [p.get('href') for p in products]
+        return list_of_url

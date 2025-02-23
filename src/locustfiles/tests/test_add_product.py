@@ -32,13 +32,9 @@ class UserPurchase(CartPage, HomePage, GetCategoryPage, ProductPage, MakePurchas
             self.random_product = choice(category)
         except IndexError:
             self.interrupt()
-        # self.random_product = '/25-virtual-gift-card'
-        # self.random_product = '/portable-sound-speakers'
-        # self.random_product = '/nike-floral-roshe-customized-running-shoes'
 
     @task
     def get_product(self):
-        logging.info(f'PRODUCT_URL {self.random_product}')
         self.product_data = self.product(product_url=self.random_product)
 
     @task

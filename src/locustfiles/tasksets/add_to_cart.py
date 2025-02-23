@@ -25,7 +25,7 @@ class MakePurchase(BaseTaskSet):
             if response_data.get('success') is True:
                 logging.info('The product has been added to your shopping cart.')
             else:
-                response.failure('Product not added!')
+                logging.error('Product not added!')
         except ValueError:
             logging.error('Failed to parse response as JSON.')
         return

@@ -25,6 +25,5 @@ class HomePage(BaseTaskSet):
         soup = BeautifulSoup(response.text, 'lxml')
         menu = soup.find('ul', class_='top-menu notmobile')
         links = menu.find_all('a', href=True)
-        all_menu_links = [item.attrs.get('href') for item in links]
-
+        all_menu_links = [item.attrs.get('href') for item in links if item.attrs.get('href') not in ('/computers', '/electronics', '/apparel')]
         return all_menu_links
