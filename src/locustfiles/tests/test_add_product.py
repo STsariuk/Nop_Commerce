@@ -27,8 +27,8 @@ class UserPurchase(CartPage, HomePage, GetCategoryPage, ProductPage, MakePurchas
     @task
     def open_menu_item(self):
         category = self.get_category(page_url=self.random_menu_item)
-        self.random_product = choice(category)
-        # self.random_product = '/nikon-d5500-dslr'
+        # self.random_product = choice(category)
+        self.random_product = '/build-your-own-computer'
         # self.random_product = '/portable-sound-speakers'
         # self.random_product = '/nike-floral-roshe-customized-running-shoes'
 
