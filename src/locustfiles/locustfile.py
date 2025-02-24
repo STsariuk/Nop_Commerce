@@ -11,7 +11,6 @@ class TestExecution(HttpUser):
     conf = TestConfig()
     wait_time = between(conf.wait_time_min, conf.wait_time_max)
     host = conf.api_url
-    # Define the test scenario in the .env file put this parameter as a system variable
     tasks = {UserPurchase: 1}
 
 

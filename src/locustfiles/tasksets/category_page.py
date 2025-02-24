@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 
 from src.locustfiles.tasksets.base import BaseTaskSet
-from src.locustfiles.tasksets.main_page import HomePage
 
 
 class GetCategoryPage(BaseTaskSet):

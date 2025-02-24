@@ -1,4 +1,3 @@
-import json
 import logging
 
 from src.locustfiles.tasksets.base import BaseTaskSet

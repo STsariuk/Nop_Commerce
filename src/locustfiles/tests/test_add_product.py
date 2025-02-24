@@ -1,6 +1,6 @@
-from locust import task
-import logging
 from random import choice
+
+from locust import task
 
 from src.locustfiles.tasksets.main_page import HomePage
 from src.locustfiles.tasksets.category_page import GetCategoryPage
