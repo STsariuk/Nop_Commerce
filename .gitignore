@@ -1,0 +1,6 @@
+.venv
+.env
+locust_test.log
+__pycache__/
+*.pyc
+.idea/
